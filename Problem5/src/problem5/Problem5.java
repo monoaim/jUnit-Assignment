@@ -1,15 +1,15 @@
 package problem5;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-
-/** @author Araya Siriadun 58090046 */
-class Problem5Test {
-    @ParameterizedTest
-    @CsvFileSource(resources = "test.csv")
-    void testComb(int x, int y, long z) {
-        assertEquals(Problem5.comb(x, y), z);
-    }
+public class Problem5 {
+ 
+    public static long comb(int n, int k) {
+		long coeff = 1;
+		for (int i = n - k + 1; i <= n; i++) {
+			coeff *= i;
+		}
+		for (int i = 1; i <= k; i++) {
+			coeff /= i;
+		}
+		return coeff;
+	}
+ 
 }

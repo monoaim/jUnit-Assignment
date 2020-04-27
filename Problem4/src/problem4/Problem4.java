@@ -1,27 +1,54 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package problem4;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ *
+ * @author user
+ */
+public class Problem4 {
+            private int[] numbers;
+            private int number;
 
-import java.util.Random;
-import org.junit.jupiter.api.RepeatedTest;
-
-/** @author Araya Siriadun 58090046 */
-class Problem4Test {
-    private Problem4 problem4 = new Problem4();
-
-    @RepeatedTest(value = 100)
-    void testSortRandom() {
-        int length = new Random().nextInt(100 + 1);
-        if (length < 2) {
-            return;
-        }
-        int[] array = new Random().ints(length, -1000000, 1000000 + 1).toArray();
-        problem4.sort(array);
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] > array[i + 1]) {
-                fail("Array is not sorted.");
+            public void sort(int[] values) {
+                    if (values ==null || values.length==0){
+                            return;
+                    }
+                    this.numbers = values;
+                    number = values.length;
+                    quicksort(0, number - 1);
             }
-        }
-        assertEquals(length, array.length);
-    }
+
+            private void quicksort(int low, int high) {
+                    int i = low, j = high;
+                    int pivot = numbers[low + (high-low)/2];
+
+                    while (i <= j) {
+
+                            while (numbers[i] < pivot) {
+                                    i++;
+                            }
+                            while (numbers[j] > pivot) {
+                                    j--;
+                            }
+                            if (i <= j) {
+                                    exchange(i, j);
+                                    i++;
+                                    j--;
+                            }
+                    }
+                    if (low < j)
+                            quicksort(low, j);
+                    if (i < high)
+                            quicksort(i, high);
+            }
+
+            private void exchange(int i, int j) {
+                    int temp = numbers[i];
+                    numbers[i] = numbers[j];
+                    numbers[j] = temp;
+            }
+
 }

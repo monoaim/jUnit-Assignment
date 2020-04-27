@@ -1,21 +1,17 @@
 package problem3;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class Problem3 {
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
-/** @author Araya Siriadun 58090046 */
-class Problem3Test {
-    @ParameterizedTest
-    @ValueSource(strings = {"12", "Hello_World", "1011.1", "-101", "1 1 0 1", ""})
-    void testBinToDecEx(String numBin) {
-        assertThrows(IllegalArgumentException.class, () -> Problem3.binToDec(numBin));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1001", "0"})
-    void testBinToDecNoEx(String numBin) {
-        Problem3.binToDec(numBin);
+    public static int binToDec(String numBin) throws IllegalArgumentException  {
+        int numDec = 0;
+        for(int i=0; i<numBin.length(); i++) {            
+            if (numBin.charAt(i) == '0') 
+                numDec = 2 * numDec;
+            else if (numBin.charAt(i) == '1')
+                numDec = (2 * numDec) + 1;
+            else
+                throw new IllegalArgumentException(numBin);                               
+        }                
+        return numDec;
     }
 }
